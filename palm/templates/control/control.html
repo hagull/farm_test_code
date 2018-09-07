@@ -1,0 +1,16 @@
+{% extends "control/layout_control.html" %}
+{% block content %}
+{% for gcg in gcg %}
+<h2>일련번호{{gcg.gcg_id}}동 제어상황(임시)</h2>
+<h3>센서노드</h3>
+{% for snode in gcg.snode_set.all %}
+<div class = "btn btn-primary">Snode {{ forloop.counter }}</div>
+{% endfor %}
+<h3>제어노드</h3>
+{% for anode in gcg.anode_set.all %}
+<div class = "btn btn-primary">Anode {{ forloop.counter }}</div>
+{% endfor %}
+<hr>
+{% endfor %}
+
+{% endblock %}

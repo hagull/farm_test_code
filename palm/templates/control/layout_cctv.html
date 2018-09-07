@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block title %} 제어모드 {% endblock %}
+{% block temp %}
+<div class = "btn btn-toolbar" role = "toolbar">
+    <a href="{% url "palm:cctv" %}" class = "btn btn-group" role = "group">전체</a>
+    {% for gcg in gcg %}
+    <a href="{% url "palm:cctv_house" gcg.gcg_id %}" class = "btn btn-group" role = "group">{{ forloop.counter }} 동</a>
+    {% endfor %}
+</div>
+{% endblock %}

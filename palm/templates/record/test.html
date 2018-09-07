@@ -1,0 +1,83 @@
+{% extends "record/layout.html" %}
+
+{% block chart %}
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['line', 'corechart']});
+
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.charts.setOnLoadCallback(drawChart_TH);
+    google.charts.setOnLoadCallback(drawChart_co2);
+    function drawChart_TH() {
+
+      var button = document.getElementById('change-chart');
+      var chartDiv = document.getElementById('TH_chart_div');
+
+      var data = new google.visualization.DataTable({{json_th|safe}});
+
+      var TH_Options = {
+        chart: {
+          title: 'change temperature & humidity at time period'
+        },
+        width: 900,
+        height: 500,
+        series: {
+          // Gives each series an axis name that matches the Y-axis below.
+          0: {axis: 'Temps'},
+          1: {axis: 'Humidity'}
+        },
+        axes: {
+          // Adds labels to each axis; they don't have to match the axis names.
+          y: {
+            Temps: {label: 'temperature(C)'},
+            Humidity: {label: 'Humidity(%)'}
+          }
+        }
+      };
+
+
+      var TH_Chart = new google.charts.Line(chartDiv);
+      TH_Chart.draw(data, TH_Options);
+
+
+
+    }
+
+
+    function drawChart_co2() {
+      var button = document.getElementById('change-chart');
+      var chartDiv = document.getElementById('co2_chart_div');
+
+      var data = new google.visualization.DataTable({{json_co2|safe}});
+
+      var co2_Options = {
+        chart: {
+          title: 'change Co2 concentration at time period'
+        },
+        width: 900,
+        height: 500,
+      };
+
+
+      var co2_Chart = new google.charts.Line(chartDiv);
+      co2_Chart.draw(data, co2_Options);
+
+    }
+</script>
+{% endblock %}
+
+{% block content %}
+    <!--Div that will hold the pie chart-->
+<h1>Test Table created</h1>
+<div id = "TH_chart_div"></div>
+<h1> Table created using ToJSCode</h1>
+<div id = "co2_chart_div"></div>
+<h1>Table created using ToJSon</h1>
+{{json_co2}}
+<p>
+{{jscode_co2}}
+<hr>
+{{json_th}}
+<p>
+{{jscode_th}}
+{% endblock %}

@@ -1,0 +1,58 @@
+{% extends "record/layout.html" %}
+
+{% block chart %}
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+    google.charts.load('current', {'packages':['line', 'corechart']});
+
+    google.charts.setOnLoadCallback(drawChart_Temp);
+    google.charts.setOnLoadCallback(drawChart_Humd);
+    function drawChart_Temp() {
+      var data = new google.visualization.DataTable({{json_temp|safe}});
+
+      var temp_options = {
+        title: 'Temperature At Time Period',
+        curveType: 'function',
+        legend: {position:'bottom'},
+        vAxis: {viewWindow:{max: 30, min : 20}},
+        width: 900,
+        height: 500,
+      };
+
+
+      var Temp_Chart = new google.charts.Line(document.getElementById('temp_chart_div'));
+      Temp_Chart.draw(data, google.charts.Line.convertOptions(temp_options));
+    }
+
+
+    function drawChart_Humd() {
+      var chartDiv = document.getElementById('humd_chart_div');
+
+      var data = new google.visualization.DataTable({{json_humd|safe}});
+
+      var humd_options = {
+        title: 'Humidity At Time Period',
+        curveType: 'function',
+        vAxis: {viewWindow:{max:70, min : 30}},
+        legend: { position:'bottom' },
+        width: 900,
+        height: 500,
+      };
+
+
+      var Humd_Chart = new google.charts.Line(document.getElementById('humd_chart_div'));
+      Humd_Chart.draw(data, google.charts.Line.convertOptions(humd_options));
+    }
+</script>
+{% endblock %}
+
+{% block content %}
+    <!--Div that will hold the pie chart-->
+<h1>Temp</h1>
+<div id = 'temp_chart_div'></div>
+<h1>Humidity</h1>
+<div id = 'humd_chart_div'></div>
+<h1>control</h1>
+<a href="{% url "palm:request_GCG" anode_house.0.anode_id %}" class = 'btn btn-primary'>1동 제어상황 : {{ anode_house1_state }}</a>
+<a href="{% url "palm:request_GCG" anode_house.1.anode_id %}" class = 'btn btn-primary'>2동 제어상황 : {{ anode_house2_state }}</a>
+{% endblock %}

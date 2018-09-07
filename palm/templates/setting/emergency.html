@@ -1,0 +1,12 @@
+{% extends "setting/layout.html" %}
+{% block content %}
+<h2>긴급모드 설정</h2>
+<a href="{% url "palm:emergency_edit" gcg_n.gcg_id %}" class = "btn btn-primary">수정</a>
+<p>
+{% for emergency in gcg_n.emergency_set.all %}
+<div class = 'btn btn-primary'>id : {{ emergency.id }} / {{ forloop.counter }} 번째</div>
+{% endfor %}
+<hr>
+{% endblock %}
+{% block temp %}
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends "control/layout_control.html" %}
+{% block content %}
+<h2>일련번호{{gcg_n.gcg_id}}동 제어상황(임시)</h2>
+<h3>센서노드</h3>
+{% for snode in gcg_n.snode_set.all %}
+<div class = "btn btn-primary">{{ forloop.counter }}번 Snode Value</div>
+<p>
+{% endfor %}
+<hr>
+<h3>제어노드</h3>
+{% for anode in gcg_n.anode_set.all %}
+<div class = "btn btn-primary">{{ forloop.counter }}번 Anode Value</div>
+<div class = "btn btn-primary">{{ forloop.counter }}번 Anode Control Box</div>
+<p>
+{% endfor %}
+<hr>
+{% endblock %}
+{# 나중에 버튼을 클릭하면 redirect로 데이터 처리 및 데이터 통신 후에 페이지 다시호출 #}

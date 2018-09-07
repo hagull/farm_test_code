@@ -1,0 +1,40 @@
+{% extends "record/layout.html" %}
+{% block content %}
+<div class ="row">
+    <p class = "col-sm-12">
+        <div class="alert alert-info">
+        </div>
+
+    <a href="{% url "palm:record_vegi_new" %}" class = "btn btn-primary pull-right">New Vegetable Category</a>
+    <p>
+            <table class = "table table-hover table-bordered">
+
+<!-- 여기서 데이터베이스 SQL 언어 발생-->
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>농장주</th>
+                        <th>작물</th>
+                        <th>생성날짜</th>
+                        <th>재배 상황</th>
+                        <th>재배 기간</th>
+                        <th>일지 개수</th>
+                    </tr>
+                </thead>
+                <tbody>
+            {% for vegi_list in vegi_category %}
+                    <tr>
+                        <td>{{vegi_list.id}}</td>
+                        <td>{{vegi_list.user}}</td>
+                        <!-- vegi_type에서 링크를 걸어주어야함 -->
+                        <td><a href="{% url "palm:record_list" vegi_list.id %}">{{vegi_list.get_vegi_type_display}}</a></td>
+                        <td>{{vegi_list.created_at }}</td>
+                        <td>{{vegi_list.record_set.all.last.get_vegi_cultivation_display}}</td>
+                        <td>{{vegi_list.record_set.all.first.created_at}} ~ {{vegi_list.record_set.all.last.created_at}}</td>
+                        <td>{{vegi_list.record_set.all.count}}</td>
+                    </tr>
+                </tbody>
+{% endfor %}
+            </table>
+    </div>
+{% endblock %}

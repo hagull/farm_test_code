@@ -1,0 +1,15 @@
+{% extends "control/layout_cctv.html" %}
+{% block content %}
+<a href="{% url "palm:control_house" gcg_n.id %}" class = "btn btn-primary pull-right">Control</a>
+<h2>일련번호{{gcg_n.gcg_id}}동(임시)</h2>
+<h3>실외</h3>
+{% for outside in gcg_n.cctvoutside_set.all %}
+<div class = "btn btn-primary"> CCTV {{ forloop.counter }} </div>
+{% endfor %}
+<hr>
+<h3>실내</h3>
+{% for inside in gcg_n.cctvinside_set.all %}
+<div class = "btn btn-primary"> CCTV {{ forloop.counter }} </div>
+{% endfor %}
+<hr>
+{% endblock %}

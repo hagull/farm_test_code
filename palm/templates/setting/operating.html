@@ -1,0 +1,13 @@
+{% extends "setting/layout.html" %}
+{% block content %}
+<h2>자동제어모드 설정</h2>
+<p>
+{% for operating in gcg_n.operating_set.all %}
+<div class = 'btn btn-primary'>id : {{ operating.id }} / {{ operating.opr_type }}</div>
+<a href="{% url "palm:operating_edit" gcg_n.id operating.id %}" class = "btn btn-primary">수정</a>
+<p>
+{% endfor %}
+<hr>
+{% endblock %}
+{% block temp %}
+{% endblock %}

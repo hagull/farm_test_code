@@ -1,0 +1,29 @@
+{% extends "record/layout.html" %}
+{% block content %}
+<div class ="row">
+    <p class = "col-sm-12">
+        <div class="alert alert-info">
+        </div>
+            <a href="{% url "palm:record_new" vegi_type_id %}" class = "btn btn-primary pull-right">New Record</a>
+            <table class = "table table-hover table-bordered">
+
+<!-- 여기서 데이터베이스 SQL 언어 발생-->
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>created at</th>
+                        <th>updated at</th>
+                    </tr>
+                </thead>
+                <tbody>
+            {% for list in record_qurry %}
+                    <tr>
+                        <td>{{list.id}}</td>
+                        <td><a href="{% url "palm:record_detail" vegi_type_id list.id %}">{{list.created_at}}</a></td>
+                        <td>{{list.updated_at}}</td>
+                    </tr>
+                </tbody>
+            {% endfor %}
+            </table>
+    </div>
+{% endblock %}

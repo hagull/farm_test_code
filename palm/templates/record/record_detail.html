@@ -1,0 +1,14 @@
+{% extends "record/layout.html" %}
+{% block content %}
+<div class = "container">
+    <div class = "row">
+        <div class = "col-sm-12">
+            <h1>{{record.id}}</h1>
+            <h1>{{record.vegi_type_id}}</h1>
+            <h1>{{record.vegi_type}}</h1>
+            <a href="{% url "palm:record_list" record.vegi_type_id %}" class = "btn btn-primary">Record List</a>
+            <a href="{% url "palm:record_edit" record.vegi_type_id record.id %}" class = "btn btn-primary">Record Edit</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block title %}설정 모드{% endblock %}
+{% block temp %}
+<div class = 'btn btn-toobar' role = 'toolbar'>
+    <a href = "{% url "palm:setting" %}" class = 'btn btn-group' role = 'group'>전체</a>
+    {% for gcg in gcg %}
+    <a href = "{% url "palm:setting_house" gcg.gcg_id %}" class = 'btn btn-group' role = 'group'>{{ forloop.counter }} 동</a>
+    {% endfor %}
+</div>
+{% endblock %}
